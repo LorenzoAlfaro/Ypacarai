@@ -1,0 +1,29 @@
+version: "2"
+services:
+  web:
+    build: .
+    image: mycontainerregistry1988.azurecr.io/web
+    ports:
+    - "8080:8080"
+    restart: always
+    depends_on:
+    - mongo    
+    #volumes: #comment out this section for azure docker compose deployment
+    #- .:/usr/src/app
+    #- /usr/src/app/node_modules #data volume, this saves the data when building the image, workdir, has not effect here
+    networks: 
+      - Net
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+    restart: always
+    networks: 
+      - Net
+networks: 
+  Net:
+    driver: bridge
+    #for some reason when I compose both containers at the same time it doesn't work, but when I stop and restart web after mongo is running it works there.
+    #volumes: 
+    #- .:/app
+    #- /node_modules
