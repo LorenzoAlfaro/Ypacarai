@@ -6,18 +6,18 @@ services:
     ports:
     - ${AppPort}:8080
     restart: always
-    depends_on:
-    - mongo    
-    #volumes: #comment out this section for azure docker compose deployment
-    #- .:/usr/src/app
-    #- /usr/src/app/node_modules #data volume, this saves the data when building the image, workdir, has not effect here
+ #   depends_on:
+  #  - mongo    
+    volumes: #comment out this section for azure docker compose deployment
+    - .:/usr/src/app
+    - /usr/src/app/node_modules #data volume, this saves the data when building the image, workdir, has not effect here
     networks: 
       - Net
-  mongo:
-    image: mongo
-    ports:
-    - "27017:27017"
-    restart: always
+  #mongo:
+   # image: mongo:bionic
+    #ports:
+#    - "27017:27017"
+#    restart: always
     networks: 
       - Net
 networks: 
