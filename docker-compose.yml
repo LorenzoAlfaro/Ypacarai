@@ -2,15 +2,15 @@ version: "2"
 services:
   web:
     build: .    
-    image: ${ContainerRegistry}/web
+    image: web
     ports:
-    - ${AppPort}:8080
+    - 80:8080
     restart: always
     depends_on:
     - mongo    
-    #volumes: #comment out this section for azure docker compose deployment
-    #- .:/usr/src/app
-    #- /usr/src/app/node_modules #data volume, this saves the data when building the image, workdir, has not effect here
+    volumes: #comment out this section for azure docker compose deployment
+    - .:/usr/src/app
+    - /usr/src/app/node_modules #data volume, this saves the data when building the image, workdir, has not effect here
     networks: 
       - Net
   mongo:
@@ -20,6 +20,13 @@ services:
     restart: always
     networks: 
       - Net
+    volumes:
+      - type: volume
+        source: mongodb_data_volume
+        target: /data/db    
+volumes:
+  mongodb_data_volume:
+    external: true
 networks: 
   Net:
     driver: bridge    
