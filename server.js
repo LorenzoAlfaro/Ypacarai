@@ -15,26 +15,26 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-var configDB = require('./config/database.js');
+// var configDB = require('./config/database.js');
 
-// configuration ===============================================================
-//mongoose.connect(configDB.url, {
-    //useMongoClient: true
-//})
-//.then(() => console.log('MongoDB Connected'))
-//.catch(err => console.log(err));; // connect to our database
+// // configuration ===============================================================
+// //mongoose.connect(configDB.url, {
+//     //useMongoClient: true
+// //})
+// //.then(() => console.log('MongoDB Connected'))
+// //.catch(err => console.log(err));; // connect to our database
 
-var connectWithRetry = function() {
-    console.log("connect")
-    useMongoClient: true
-    return mongoose.connect(configDB.url, function(err) {
-      if (err) {
-        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
-        setTimeout(connectWithRetry, 5000);
-      }
-    });
-  };
-  connectWithRetry();
+// var connectWithRetry = function() {
+//     console.log("connect")
+//     useMongoClient: true
+//     return mongoose.connect(configDB.url, function(err) {
+//       if (err) {
+//         console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+//         setTimeout(connectWithRetry, 5000);
+//       }
+//     });
+//   };
+//   connectWithRetry();
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -52,8 +52,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+//app.use(passport.initialize());
+//app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================??
