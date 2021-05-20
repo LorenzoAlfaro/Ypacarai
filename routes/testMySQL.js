@@ -5,9 +5,9 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
     
     var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'admin',
+        host: 'database-1.cn86bfkim3md.us-east-1.rds.amazonaws.com',
+        user: 'admin',
+        password: 'choCOlateCaliente1',
         database: 'wwm'
       })
       
