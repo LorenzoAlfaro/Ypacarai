@@ -14,6 +14,7 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var testMYSQL =  require("./routes/testMySQL");
 
 // var configDB = require('./config/database.js');
 
@@ -43,6 +44,8 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/testMySQL", testMYSQL); // inserted code, might not work
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
